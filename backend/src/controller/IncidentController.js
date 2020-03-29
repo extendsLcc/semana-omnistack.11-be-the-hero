@@ -22,7 +22,7 @@ module.exports = {
                 'ongs.uf'
             ]);
 
-        res.header( 'X-Total-Count', count );
+        res.header( 'X-Total-Count', count['count(*)'] );
 
         return res.json(incidents);
 
