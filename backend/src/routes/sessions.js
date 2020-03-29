@@ -1,8 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
-const SessionController = require( '../controller/SessionController' );
+const {celebrate, Segments, Joi } = require('celebrate');
 
-router.post( '/sessions', SessionController.create );
+const SessionController = require('../controller/SessionController');
+
+router.post('/sessions',
+    celebrate({
+        [Segments.BODY]: Joi.object().keys({
+            title: Joi.string().required(),
+            description: Joi.string().required(),
+            value: Joi.number().required(),
+        })
+    }), SessionController.create);
 
 module.exports = router;
